@@ -4,6 +4,7 @@ import { Cart } from '@/types/cart'
 import { Product } from '@/types/product'
 import fs from 'fs/promises'
 import { GetStaticPropsContext } from 'next'
+import { useRouter } from 'next/router'
 import path from 'path'
 import { useRef } from 'react'
 
@@ -39,8 +40,9 @@ type ProductDetailPageProps = {
 
 function ProductDetailPage(props: ProductDetailPageProps) {
   const { product } = props
+  const router = useRouter()
   const qtyRef = useRef<HTMLInputElement>(null)
-  const { cart, addToCart } = useCart()
+  const { addToCart } = useCart()
 
   function handleAddToCart() {
     const qty = qtyRef?.current?.value || 0
@@ -49,16 +51,13 @@ function ProductDetailPage(props: ProductDetailPageProps) {
     }
 
     const cartItem: Cart = {
-      ...product,
+      product: {
+        ...product
+      },
       qty: Number(qty),
     }
 
-    addToCart({
-      ...cart,
-      [product.id]: {
-        ...cartItem,
-      }
-    })
+    addToCart(cartItem)
   }
 
   return (
@@ -67,6 +66,7 @@ function ProductDetailPage(props: ProductDetailPageProps) {
       <p>{product.price}</p>
       <input type="number" ref={qtyRef} />
       <button onClick={handleAddToCart}>Add to cart</button>
+      <button onClick={() => router.push(`/`)}>See all products</button>
     </>
   )
 }

@@ -1,7 +1,8 @@
 import { Product } from "./product"
 
-export interface Cart extends Product {
+export type Cart = {
   qty: number
+  product: Product
 }
 
 export type CartList = {

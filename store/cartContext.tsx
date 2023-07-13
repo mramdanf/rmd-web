@@ -1,16 +1,39 @@
 import { Cart, CartList } from "@/types/cart"
-import { ReactElement, createContext, useContext, useState } from "react"
+import { ReactElement, createContext, useCallback, useContext, useState } from "react"
 
 const useCartController = () => {
-  const [cart, addToCart] = useState<CartList>({})
+  const [cartList, setCart] = useState<CartList>({})
+  const addToCart = useCallback((cartItem: Cart) => {
+    let newCartList;
+    const productId = cartItem.product.id
+    const productInCart = cartList[productId]
+    if (productInCart) {
+      newCartList = {
+        ...cartList,
+        [productId]: {
+          ...productInCart,
+          qty: productInCart.qty + cartItem.qty,
+        }
+      }
+      setCart(newCartList)
+      return;
+    }
+
+    setCart({
+      ...cartList,
+      [productId]: {
+        ...cartItem
+      }
+    })
+  }, [cartList])
   return {
-    cart,
+    cartList,
     addToCart,
   }
 }
 
 const CartContext = createContext<ReturnType<typeof useCartController>>({
-  cart: {},
+  cartList: {},
   addToCart: () => {},
 })
 

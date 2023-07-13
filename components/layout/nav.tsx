@@ -1,3 +1,4 @@
+import Cart from '../cart'
 import classes from './nav.module.css'
 function Nav() {
   return (
@@ -6,7 +7,7 @@ function Nav() {
         rmd shop
       </div>
       <div>
-        cart
+        <Cart />
       </div>
     </header>
   )
