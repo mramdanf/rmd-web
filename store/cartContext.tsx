@@ -28,7 +28,7 @@ const useCartController = () => {
     })
   }, [cartList])
 
-  const removeFromCart = useCallback((productId: string) => {
+  const removeFromCart = useCallback((productId: number) => {
     const { [productId]: _, ...newCartList } = cartList
     setCart(newCartList)
   }, [cartList])
