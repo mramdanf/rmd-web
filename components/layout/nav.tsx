@@ -3,7 +3,7 @@ import Cart from '../cart/cart'
 function Nav() {
   return (
     <header className='border-b'>
-      <div className='flex intems-center justify-between mx-auto max-w-6xl px-6 pt-4 pb-2 md:pt-6'>
+      <div className='flex items-center justify-between mx-auto max-w-6xl px-6 pt-4 pb-2 md:pt-6 relative'>
         <div>
           <Link href="/">Ramdan Shop</Link>
         </div>
