@@ -28,22 +28,37 @@ const useCartController = () => {
     })
   }, [cartList])
 
-  const removeFromCart = useCallback((productId: number) => {
-    const { [productId]: _, ...newCartList } = cartList
-    setCart(newCartList)
+  const updateCart = useCallback((cartItem: Cart) => {
+    const { product } = cartItem
+    const { [product.id]: _, ...newCartList } = cartList
+    
+    // delete
+    if (cartItem.qty === 0) {
+      setCart(newCartList)
+      return
+    }
+
+    // update
+    setCart({
+      ...cartList,
+      [product.id]: {
+        ...cartItem
+      }
+    })
+
   }, [cartList])
 
   return {
     cartList,
     addToCart,
-    removeFromCart,
+    updateCart,
   }
 }
 
 const CartContext = createContext<ReturnType<typeof useCartController>>({
   cartList: {},
   addToCart: () => {},
-  removeFromCart: () => {}
+  updateCart: () => {},
 })
 
 export const CartProvider = ({ children }: { children: ReactElement }) => (

@@ -3,7 +3,7 @@ import Link from "next/link"
 import XMarkIcon from "../icons/x-mart-icon"
 
 function CartList() {
-  const { cartList, removeFromCart } = useCart()
+  const { cartList, updateCart } = useCart()
   return (
     <table className="min-h-80 max-w-2xl mx-auto w-full">
       <thead>
@@ -38,6 +38,7 @@ function CartList() {
                 step="1"
                 className="text-gray-900 form-input border border-gray-300 w-16 rounded-sm pl-1"
                 value={qty}
+                onChange={val => updateCart({ product, qty: Number(val.target.value) })}
               />
             </td>
             <td
@@ -47,7 +48,7 @@ function CartList() {
             </td>
             <td className="font-primary font-medium px-4 sm:px-6 py-4 text-center">
               <button
-                onClick={() => removeFromCart(product.id)}>
+                onClick={() => updateCart({ product, qty: 0 })}>
                 <XMarkIcon
                   className="w-8 h-8 text-palette-primary border border-palette-primary p-1 hover:bg-palette-lighter"
                 />
