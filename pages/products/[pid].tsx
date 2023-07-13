@@ -1,35 +1,29 @@
-import ProductListItem from '@/components/product/product-list-item'
 import { useCart } from '@/store/cartContext'
 import { Cart } from '@/types/cart'
 import { Product } from '@/types/product'
-import fs from 'fs/promises'
 import { GetStaticPropsContext } from 'next'
 import { useRouter } from 'next/router'
-import path from 'path'
 import { useRef } from 'react'
 
-async function getProductsFromBackEnd(): Promise<Product[]> {
-  const filePath = path.join(process.cwd(), 'dummy-products.json')
-  const jsonData = await fs.readFile(filePath)
-  const data = JSON.parse(jsonData.toString())
-
-  return data.products as Array<Product>
-}
-
 export async function getStaticProps(context: GetStaticPropsContext<{ pid: string }>) {
-  const products = await getProductsFromBackEnd()
   const productId = context.params?.pid
+  console.log({ productId  })
+  const resp = await fetch(`https://dummyjson.com/products/${productId}`)
+  const product = await resp.json()
   return {
     props: {
-      product: products.find(product => product.id === productId) || {} as Product
+      product: product
     }
   }
 }
 
 export async function getStaticPaths() {
-  const products = await getProductsFromBackEnd()
+  const resp = await fetch('https://dummyjson.com/products')
+  const data = await resp.json()
+  const products = data.products as Product[]
+
   return {
-    paths: products.map(product => ({ params: { pid: product.id  } })),
+    paths: products.map(product => ({ params: { pid: product.id.toString()  } })),
     fallback: false,
   }
 }
@@ -62,7 +56,7 @@ function ProductDetailPage(props: ProductDetailPageProps) {
 
   return (
     <>
-      <p>{product.name}</p>
+      <p>{product.title}</p>
       <p>{product.price}</p>
       <input type="number" ref={qtyRef} />
       <button onClick={handleAddToCart}>Add to cart</button>

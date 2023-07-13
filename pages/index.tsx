@@ -19,9 +19,8 @@ export default function Home(props: HomePageProps) {
 }
 
 export async function getStaticProps() {
-  const filePath = path.join(process.cwd(), 'dummy-products.json')
-  const jsonData = await fs.readFile(filePath)
-  const data = JSON.parse(jsonData.toString())
+  const resp = await fetch('https://dummyjson.com/products')
+  const data = await resp.json()
 
   return {
     props: {
