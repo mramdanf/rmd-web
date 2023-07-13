@@ -15,7 +15,7 @@ function CartList() {
         </tr>
       </thead>
       <tbody className="divide-y divide-palette-lighter">
-        {Object.values(cartList).map(({ product, qty }) => (
+        {Object.values(cartList).map(({ product, qty, subtotal }) => (
           <tr 
             key={product.id}
             className="text-sm sm:text-base text-gray-600"
@@ -44,7 +44,7 @@ function CartList() {
             <td
               className="font-primary text-base font-light px-4 sm:px-6 py-4 hidden sm:table-cell text-center"
             >
-              {product.price}
+              {subtotal || 0}
             </td>
             <td className="font-primary font-medium px-4 sm:px-6 py-4 text-center">
               <button

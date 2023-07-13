@@ -1,6 +1,11 @@
 import { Cart, CartList } from "@/types/cart"
 import { ReactElement, createContext, useCallback, useContext, useState } from "react"
 
+const cartItemWithSubtotal = (cart: Cart): Cart => ({
+  ...cart,
+  subtotal: cart.qty * cart.product.price
+})
+
 const useCartController = () => {
   const [cartList, setCart] = useState<CartList>({})
   
@@ -12,8 +17,10 @@ const useCartController = () => {
       newCartList = {
         ...cartList,
         [productId]: {
-          ...productInCart,
-          qty: productInCart.qty + cartItem.qty,
+          ...cartItemWithSubtotal({
+            ...productInCart,
+            qty: productInCart.qty + cartItem.qty,
+          })
         }
       }
       setCart(newCartList)
@@ -23,7 +30,7 @@ const useCartController = () => {
     setCart({
       ...cartList,
       [productId]: {
-        ...cartItem
+        ...cartItemWithSubtotal(cartItem)
       }
     })
   }, [cartList])
@@ -42,7 +49,7 @@ const useCartController = () => {
     setCart({
       ...cartList,
       [product.id]: {
-        ...cartItem
+        ...cartItemWithSubtotal(cartItem)
       }
     })
 

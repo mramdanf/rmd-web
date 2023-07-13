@@ -2,6 +2,7 @@ import { Product } from "./product"
 
 export type Cart = {
   qty: number
+  subtotal?: number
   product: Product
 }
 
