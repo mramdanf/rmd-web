@@ -1,8 +1,11 @@
 import ProductListItem from '@/components/product/product-list-item'
+import { useCart } from '@/store/cartContext'
+import { Cart } from '@/types/cart'
 import { Product } from '@/types/product'
 import fs from 'fs/promises'
 import { GetStaticPropsContext } from 'next'
 import path from 'path'
+import { useRef } from 'react'
 
 async function getProductsFromBackEnd(): Promise<Product[]> {
   const filePath = path.join(process.cwd(), 'dummy-products.json')
@@ -36,13 +39,34 @@ type ProductDetailPageProps = {
 
 function ProductDetailPage(props: ProductDetailPageProps) {
   const { product } = props
+  const qtyRef = useRef<HTMLInputElement>(null)
+  const { cart, addToCart } = useCart()
+
+  function handleAddToCart() {
+    const qty = qtyRef?.current?.value || 0
+    if (qty === 0) {
+      return;
+    }
+
+    const cartItem: Cart = {
+      ...product,
+      qty: Number(qty),
+    }
+
+    addToCart({
+      ...cart,
+      [product.id]: {
+        ...cartItem,
+      }
+    })
+  }
 
   return (
     <>
       <p>{product.name}</p>
       <p>{product.price}</p>
-      <input type="number" />
-      <button>Add to cart</button>
+      <input type="number" ref={qtyRef} />
+      <button onClick={handleAddToCart}>Add to cart</button>
     </>
   )
 }
