@@ -1,7 +1,7 @@
 import { useCart } from "@/store/cartContext"
 
 function CartList() {
-  const { cartList } = useCart()
+  const { cartList, removeFromCart } = useCart()
   return (
     <table>
       <thead>
@@ -18,7 +18,9 @@ function CartList() {
             <td>{product.name}</td>
             <td>{qty}</td>
             <td>{product.price}</td>
-            <td></td>
+            <td>
+              <button onClick={() => removeFromCart(product.id)}>remove</button>
+            </td>
           </tr>
         ))}
       </tbody>

@@ -3,6 +3,7 @@ import { ReactElement, createContext, useCallback, useContext, useState } from "
 
 const useCartController = () => {
   const [cartList, setCart] = useState<CartList>({})
+  
   const addToCart = useCallback((cartItem: Cart) => {
     let newCartList;
     const productId = cartItem.product.id
@@ -26,15 +27,23 @@ const useCartController = () => {
       }
     })
   }, [cartList])
+
+  const removeFromCart = useCallback((productId: string) => {
+    const { [productId]: _, ...newCartList } = cartList
+    setCart(newCartList)
+  }, [cartList])
+
   return {
     cartList,
     addToCart,
+    removeFromCart,
   }
 }
 
 const CartContext = createContext<ReturnType<typeof useCartController>>({
   cartList: {},
   addToCart: () => {},
+  removeFromCart: () => {}
 })
 
 export const CartProvider = ({ children }: { children: ReactElement }) => (
