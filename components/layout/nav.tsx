@@ -1,10 +1,11 @@
-import Cart from '../cart'
+import Link from 'next/link'
+import Cart from '../cart/cart'
 import classes from './nav.module.css'
 function Nav() {
   return (
     <header className={classes.header}>
       <div>
-        rmd shop
+        <Link href="/">rmd shop</Link>
       </div>
       <div>
         <Cart />
