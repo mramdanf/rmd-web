@@ -1,12 +1,11 @@
 import Link from 'next/link'
 import Cart from '../cart/cart'
-import classes from './nav.module.css'
 function Nav() {
   return (
-    <header className={classes.header}>
-      <div className={classes.wrapper}>
+    <header className='border-b'>
+      <div className='flex intems-center justify-between mx-auto max-w-6xl px-6 pt-4 pb-2 md:pt-6'>
         <div>
-          <Link href="/">rmd shop</Link>
+          <Link href="/">Ramdan Shop</Link>
         </div>
         <div>
           <Cart />

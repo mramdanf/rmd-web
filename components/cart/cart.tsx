@@ -1,11 +1,10 @@
 import { useCart } from "@/store/cartContext"
-import { useRouter } from "next/router"
+import Link from "next/link"
 import { useMemo } from "react"
 
-import classes from './cart.module.css'
+import CartIcon from "../icons/cart-icon"
 
 function Cart() {
-  const router = useRouter()
   const { cartList } = useCart()
   const sumCartQty = useMemo(() => {
     let sum = 0
@@ -15,9 +14,10 @@ function Cart() {
     return sum
   }, [cartList])
   return (
-    <>
-      <p className={classes.cartCount} onClick={() => router.push('/cart')}>Cart: {sumCartQty}</p>
-    </>
+    <Link href="/cart">
+      <CartIcon />
+      {sumCartQty > 0 && <span className="absolute top-2 right-1 bg-yellow-300 rounded-full text-xs py-1 px-2">{sumCartQty}</span>}
+    </Link>
   )
 }
 
