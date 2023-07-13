@@ -1,6 +1,8 @@
 import { Product } from "@/types/product"
 import ProductDetail from "./product-detail"
 
+import classes from './product-list.module.css'
+
 type ProductListProps = {
   products: Array<Product>
 }
@@ -8,9 +10,11 @@ type ProductListProps = {
 function ProductList(props: ProductListProps) {
   const { products } = props
   return (
-    products.map(product => (
-      <ProductDetail {...product} />
-    ))
+    <div className={classes.productList}>
+      {products.map(product => (
+        <ProductDetail {...product} />
+      ))}
+    </div>
   )
 }
 

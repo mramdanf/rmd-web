@@ -1,9 +1,11 @@
 import { Product } from "@/types/product";
 
+import classes from './product-detail.module.css'
+
 function ProductDetail(props: Product) {
   const { name, price } = props
   return (
-    <div>
+    <div className={classes.product}>
       <img />
       <p>{name}</p>
       <p>{price}</p>
