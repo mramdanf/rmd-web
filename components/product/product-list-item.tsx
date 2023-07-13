@@ -8,7 +8,7 @@ function ProductListItem(props: Product) {
       href={`/products/${id}`}
       className="h-120 w-72 rounded shadow-lg mx-auto border border-palette-lighter">
       <div className="border-b-2 border-pallete-lighter">
-        <img src={thumbnail} alt={title} className="w-72 h-72 object-none"/>
+        <img src={thumbnail} alt={title} className="w-72 h-72 object-cover"/>
       </div>
       <div className="h-48 relative">
         <p className="text-xl pt-4 px-4 font-semibold">
