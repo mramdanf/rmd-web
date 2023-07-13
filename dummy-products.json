@@ -8,12 +8,37 @@
     {
       "id": "prod-2",
       "name": "mouse",
-      "price": 20000
+      "price": 10000
     },
     {
       "id": "prod-3",
       "name": "keyboard",
+      "price": 20000
+    },
+    {
+      "id": "prod-4",
+      "name": "monitor",
       "price": 30000
+    },
+    {
+      "id": "prod-5",
+      "name": "headset",
+      "price": 40000
+    },
+    {
+      "id": "prod-6",
+      "name": "hdmi switch",
+      "price": 50000
+    },
+    {
+      "id": "prod-7",
+      "name": "hdmi",
+      "price": 60000
+    },
+    {
+      "id": "prod-8",
+      "name": "charger",
+      "price": 70000
     }
   ]
 }

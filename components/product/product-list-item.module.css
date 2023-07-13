@@ -1,6 +1,9 @@
 .product {
-  margin: 6px;
+  margin: 15px;
   border: 1px solid black;
   padding: 10px;
   cursor: pointer;
+
+  min-width: 30%;
+  min-height: 150px;;
 }

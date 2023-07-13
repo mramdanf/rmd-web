@@ -4,11 +4,13 @@ import classes from './nav.module.css'
 function Nav() {
   return (
     <header className={classes.header}>
-      <div>
-        <Link href="/">rmd shop</Link>
-      </div>
-      <div>
-        <Cart />
+      <div className={classes.wrapper}>
+        <div>
+          <Link href="/">rmd shop</Link>
+        </div>
+        <div>
+          <Cart />
+        </div>
       </div>
     </header>
   )
