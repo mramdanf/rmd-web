@@ -1,6 +1,5 @@
 import { Product } from "@/types/product"
 
-import classes from './product-list.module.css'
 import ProductListItem from "./product-list-item"
 
 type ProductListProps = {
@@ -10,7 +9,7 @@ type ProductListProps = {
 function ProductList(props: ProductListProps) {
   const { products } = props
   return (
-    <div className={classes.productList}>
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-8">
       {products.map(product => (
         <ProductListItem key={product.id} {...product} />
       ))}
