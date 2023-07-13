@@ -1,11 +1,31 @@
-import { Inter } from 'next/font/google'
+import ProductList from '@/components/product/product-list'
+import { Product } from '@/types/product'
+import fs from 'fs/promises'
+import path from 'path'
 
-const inter = Inter({ subsets: ['latin'] })
+type HomePageProps = {
+  products: Array<Product>
+}
 
-export default function Home() {
+export default function Home(props: HomePageProps) {
+  const { products } = props
+
+  if (!products) {
+    return <p>Loading ...</p>
+  }
   return (
-    <>
-      <p>test</p>
-    </>
+    <ProductList products={products} />
   )
+}
+
+export async function getStaticProps() {
+  const filePath = path.join(process.cwd(), 'dummy-products.json')
+  const jsonData = await fs.readFile(filePath)
+  const data = JSON.parse(jsonData.toString())
+
+  return {
+    props: {
+      products: data.products
+    }
+  }
 }
