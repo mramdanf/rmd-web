@@ -1,5 +1,8 @@
 import { Product } from "@/types/product";
+import Image from "next/image";
 import Link from "next/link";
+
+import classes from './product-list-item.module.css'
 
 function ProductListItem(props: Product) {
   const { title, price, id, thumbnail, description } = props
@@ -7,8 +10,13 @@ function ProductListItem(props: Product) {
     <Link 
       href={`/products/${id}`}
       className="h-120 w-72 rounded shadow-lg mx-auto border border-palette-lighter">
-      <div className="border-b-2 border-pallete-lighter">
-        <img src={thumbnail} alt={title} className="w-72 h-72 object-cover"/>
+      <div className="w-full">
+        <Image 
+          src={thumbnail}
+          alt={title}
+          layout="fill"
+          className={classes.image}
+        />
       </div>
       <div className="h-48 relative">
         <p className="text-xl pt-4 px-4 font-semibold">
