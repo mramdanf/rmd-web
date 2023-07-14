@@ -1,3 +1,4 @@
+import SeeAllProductBtn from '@/components/product/see-all-product-btn'
 import { useCart } from '@/store/cartContext'
 import { Cart } from '@/types/cart'
 import { Product } from '@/types/product'
@@ -79,9 +80,7 @@ function ProductDetailPage(props: ProductDetailPageProps) {
             <button 
               className='pt-3 pb-2 mb-2 rounded-sm text-lg bg-palette-primary text-white font-primary font-semibold' 
               onClick={handleAddToCart}>Add to cart</button>
-            <Link
-              className='pt-3 pb-2 rounded-sm text-lg font-primary font-semibold text-center text-palette-primary border border-palette-primary' 
-              href="/">See all products</Link>
+            <SeeAllProductBtn />
           </div>
         </div>
       </div>

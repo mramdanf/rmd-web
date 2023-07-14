@@ -1,12 +1,13 @@
 import { useCart } from "@/store/cartContext"
 import Link from "next/link"
 import XMarkIcon from "../icons/x-mart-icon"
+import SeeAllProductBtn from "../product/see-all-product-btn"
 
 function CartList() {
   const { cartList, updateCart } = useCart()
   return (
-    <>
-      <table className="min-h-80 max-w-2xl mx-auto w-full">
+    <div className="min-h-90 max-w-2xl w-full py-1 mx-auto my-4">
+      <table className="mx-auto mb-4">
         <thead>
           <tr className="uppercase text-xs sm:text-sm text-palette-primary border-b bolder-pallete-light text-center">
             <td className="font-primary font-normal px-6 py-4">Product</td>
@@ -64,8 +65,10 @@ function CartList() {
           </tr>
         </tbody>
       </table>
-
-    </>
+      <div className="text-center">
+        <SeeAllProductBtn />
+      </div>
+    </div>
   )
 }
 
