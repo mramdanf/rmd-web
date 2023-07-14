@@ -1,7 +1,8 @@
 import ProductList from '@/components/product/product-list'
+import SearchProduct from '@/components/product/search-product'
 import { Product } from '@/types/product'
-import fs from 'fs/promises'
-import path from 'path'
+
+export { getServerSideProps } from '../store/productContext'
 
 type HomePageProps = {
   products: Array<Product>
@@ -14,17 +15,9 @@ export default function Home(props: HomePageProps) {
     return <p>Loading ...</p>
   }
   return (
-    <ProductList products={products} />
+    <>
+      <SearchProduct />
+      <ProductList />
+    </>
   )
-}
-
-export async function getServerSideProps() {
-  const resp = await fetch('https://dummyjson.com/products')
-  const data = await resp.json()
-
-  return {
-    props: {
-      products: data.products
-    }
-  }
 }
