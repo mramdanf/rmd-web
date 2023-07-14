@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import classes from './product-list-item.module.css'
+import Price from "./price";
 
 function ProductListItem(props: Product) {
   const { title, price, id, thumbnail, description } = props
@@ -25,10 +26,7 @@ function ProductListItem(props: Product) {
         <p className="text-sm p-4 text-grey-600 font-light">
           {description}
         </p>
-        <p className="text-palette-dark font-primary font-medium text-base absolute bottom-0 right-0 mb-4 pl-8 pr-4 pb-1 pt-2 bg-palette-lighter 
-            rounded-tl-sm triangle">
-          {price}
-        </p>
+        <Price val={price} currency="$" />
       </div>
     </Link>
   )
