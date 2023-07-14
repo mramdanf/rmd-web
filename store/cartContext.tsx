@@ -1,5 +1,7 @@
 import { Cart, CartList } from "@/types/cart"
-import { ReactElement, createContext, useCallback, useContext, useState } from "react"
+import { ReactElement, createContext, useCallback, useContext, useEffect, useState } from "react"
+
+const CART_KEY = 'CART'
 
 const cartItemWithSubtotal = (cart: Cart): Cart => ({
   ...cart,
@@ -8,6 +10,26 @@ const cartItemWithSubtotal = (cart: Cart): Cart => ({
 
 const useCartController = () => {
   const [cartList, setCart] = useState<CartList>({})
+
+  useEffect(() => {
+    const cartFromStorage = window.localStorage.getItem(CART_KEY)
+    
+    if (!cartFromStorage) {
+      return;
+    }
+
+    try {
+      const cartData = JSON.parse(cartFromStorage)
+      setCart(cartData)
+    } catch (error) {
+      console.error(error)
+    }
+  }, [])
+
+  const saveCart = useCallback((cartList: CartList) => {
+    setCart(cartList)
+    window.localStorage.setItem(CART_KEY, JSON.stringify(cartList))
+  }, [])
   
   const addToCart = useCallback((cartItem: Cart) => {
     let newCartList;
@@ -23,17 +45,17 @@ const useCartController = () => {
           })
         }
       }
-      setCart(newCartList)
+      saveCart(newCartList)
       return;
     }
 
-    setCart({
+    saveCart({
       ...cartList,
       [productId]: {
         ...cartItemWithSubtotal(cartItem)
       }
     })
-  }, [cartList])
+  }, [cartList, saveCart])
 
   const updateCart = useCallback((cartItem: Cart) => {
     const { product } = cartItem
@@ -41,19 +63,19 @@ const useCartController = () => {
     
     // delete
     if (cartItem.qty === 0) {
-      setCart(newCartList)
+      saveCart(newCartList)
       return
     }
 
     // update
-    setCart({
+    saveCart({
       ...cartList,
       [product.id]: {
         ...cartItemWithSubtotal(cartItem)
       }
     })
 
-  }, [cartList])
+  }, [cartList, saveCart])
 
   return {
     cartList,
