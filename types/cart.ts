@@ -1,11 +1,11 @@
-import { Product } from "./product"
+import { Product } from './product';
 
 export type Cart = {
-  qty: number
-  subtotal?: number
-  product: Product
-}
+  qty: number;
+  subtotal?: number;
+  product: Product;
+};
 
 export type CartList = {
-  [key: string]: Cart
-}
+  [key: string]: Cart;
+};

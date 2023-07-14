@@ -1,9 +1,7 @@
-import CartList from "@/components/cart/cart-list";
+import CartList from '@/components/cart/cart-list';
 
 function CartPage() {
-  return (
-    <CartList />
-  )
+  return <CartList />;
 }
 
-export default CartPage
+export default CartPage;

@@ -1,15 +1,13 @@
-import { ReactElement } from "react";
-import Nav from "./nav";
+import { ReactElement } from 'react';
+import Nav from './nav';
 
 function Layout({ children }: { children: ReactElement }) {
   return (
     <>
       <Nav />
-      <main>
-        {children}
-      </main>
+      <main>{children}</main>
     </>
-  )
+  );
 }
 
-export default Layout
+export default Layout;
