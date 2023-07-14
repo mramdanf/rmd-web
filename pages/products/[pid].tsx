@@ -4,11 +4,9 @@ import { Cart } from '@/types/cart'
 import { Product } from '@/types/product'
 import { GetStaticPropsContext } from 'next'
 import Image from 'next/image'
-import Link from 'next/link'
-import { useRouter } from 'next/router'
 import { useRef } from 'react'
 
-export async function getStaticProps(context: GetStaticPropsContext<{ pid: string }>) {
+export async function getServerSideProps(context: GetStaticPropsContext<{ pid: string }>) {
   const productId = context.params?.pid
   const resp = await fetch(`https://dummyjson.com/products/${productId}`)
   const product = await resp.json()
@@ -16,17 +14,6 @@ export async function getStaticProps(context: GetStaticPropsContext<{ pid: strin
     props: {
       product: product
     }
-  }
-}
-
-export async function getStaticPaths() {
-  const resp = await fetch('https://dummyjson.com/products')
-  const data = await resp.json()
-  const products = data.products as Product[]
-
-  return {
-    paths: products.map(product => ({ params: { pid: product.id.toString()  } })),
-    fallback: false,
   }
 }
 

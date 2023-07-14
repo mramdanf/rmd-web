@@ -18,7 +18,7 @@ export default function Home(props: HomePageProps) {
   )
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   const resp = await fetch('https://dummyjson.com/products')
   const data = await resp.json()
 
