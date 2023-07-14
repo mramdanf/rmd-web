@@ -1,5 +1,6 @@
 import ProductList from '@/components/product/product-list'
 import SearchProduct from '@/components/product/search-product'
+import SortProduct from '@/components/product/sort-product'
 import { Product } from '@/types/product'
 
 export { getServerSideProps } from '../store/productContext'
@@ -16,7 +17,10 @@ export default function Home(props: HomePageProps) {
   }
   return (
     <>
-      <SearchProduct />
+      <div className='flex justify-between max-w-6xl mx-auto mt-10 px-7'>
+        <SearchProduct />
+        <SortProduct />
+      </div>
       <ProductList />
     </>
   )

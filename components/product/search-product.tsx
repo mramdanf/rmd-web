@@ -11,7 +11,7 @@ function SearchProduct() {
     }, 1000)
   }
   return (
-    <div className="max-w-6xl mx-auto pt-5">
+    <div>
       <span className="mr-2 ml-4">Search product name:</span>
       <input 
         type="text"

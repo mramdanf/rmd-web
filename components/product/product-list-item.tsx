@@ -14,7 +14,7 @@ function ProductListItem(props: Product) {
         <Image 
           src={thumbnail}
           alt={title}
-          layout="fill"
+          fill
           className={classes.image}
         />
       </div>
